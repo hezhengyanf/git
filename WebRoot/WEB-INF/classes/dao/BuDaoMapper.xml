@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.BuDaoMapper">
+<resultMap type="Bu" id="list"> 
+ <result property="bumenTableid" column="bumenTableid"/> 
+ <result property="bumenTablename" column="bumenTablename"/> 
+  <result property="bumenTableaddress" column="bumenTableaddress"/> 
+ <result property="bumenTabledirector" column="bumenTabledirector"/> 
+      <collection property="list"  ofType="Yuan"> 
+            <result property="id" column="id"/>       
+      <result property="yuangongname" column="yuangongname"/>
+        <result property="word" column="word"/>
+          <result property="wage" column="wage"/>
+            <result property="entryTime" column="entryTime"/>    
+      </collection>
+      
+</resultMap>
+ 
+<select id="Cha" parameterType="Bu" resultMap="list">
+select a.*,b.yuangongname,b.word,b.wage,b.entryTime,b.id from bumentable a,yuangong b 
+WHERE a.bumenTableid=b.bumenTableId
+</select>
+<insert id="set" parameterType="Bu">
+ insert into Bumentable(bumenTablename,bumenTableaddress,bumenTabledirector)  
+             values(#{bumenTablename},#{bumenTableaddress},#{bumenTabledirector} )  
+</insert>
+<select id="UpStudent" resultType="Bu">
+ select bumenTableid from Bumentable where bumenTableid=#{bumenTableid}
+</select>
+
+</mapper>

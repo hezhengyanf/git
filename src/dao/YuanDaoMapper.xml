@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.YuanDaoMapper">
+ 
+ 
+<delete id="Del" parameterType="Yuan">
+DELETE from yuangong where id=#{id}
+</delete>
+ <insert id="set" parameterType="Yuan">
+ INSERT INTO yuangong(yuangongname,word,entryTime,wage,bonus,bumenTableId)VALUES(#{yuangongname},#{word},#{entryTime},#{wage},#{bonus},#{bumenTableId})
+ </insert>
+ 
+<select id="getMo" resultType="Yuan">
+select * from yuangong  
+<where>
+	<if test="word !=null and word !='' ">
+	and word like CONCAT('%',#{word},'%')	
+	</if>
+	<if test="yuangongname !=null and yuangongname !=''">
+	and yuangongname like CONCAT('%',#{yuangongname},'%')	
+	</if>	 
+</where>
+</select>
+</mapper>
